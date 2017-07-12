@@ -5,7 +5,6 @@ nz_tcoder
 ---
 
 ## 目次
-* 自己紹介
 * はじめに
 * 数独リゾルバ
 * 比較してみる
@@ -13,17 +12,6 @@ nz_tcoder
 
 ---
 
-## 自己紹介 & Lispとの関わり
-* 名前: 野里 貴仁 (52才)
-* 職業: 電機メーカの社内情報システム開発
-* 大学のプログラミング授業 (1985)
- * H/W: VAX11-750, OS: 4.2BSD, Franz Lisp
-* Lispで卒論、修論を書く研究室に所属(1987-1989)
- * H/W: Sun3, OS: sunos-3.X, Kyoto Common Lisp
-* 就職後はLispと縁が切れるが、最近半ば個人的にLispを使い出す(2014〜)
- * H/W: ???, OS: Cent-OS, Clozure Common Lisp
-
----
 
 ## はじめに
 lispはマイナーです。<!-- .element: style="text-align: left;" -->
