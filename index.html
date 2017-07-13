@@ -94,7 +94,7 @@ lispはマイナーです。
 ---
 
 ## 数独リゾルバ(概要)
-* possible: セル(row,col)について、配置可能な数字を求める。<!-- .element: style="text-align: left; font-size:xx-large;" -->
+* possible: セル(row,col)について、配置可能な数字を求める。
 
 ![数独リゾルバ](img/resolver1.png)
 
@@ -103,13 +103,13 @@ lispはマイナーです。
 
 ## 数独リゾルバ(概要)
 * scan:
- 1. 未設定の各セルに対しpossibleを呼ぶ(イテレータ:each_unknown利用)<!-- .element: style="font-size:xx-large;" -->
- 1. possibleの結果(配置可能な数字)が一つであれば、その値をセルに設定する。<!-- .element: style="font-size:xx-large;" -->
- 1. セルの設定ができなくなったら終了する。終了時には、possibleの結果が最も少ないセルのrow、col、配置可能な数字のリストを返す。<!-- .element: style="font-size:xx-large;" -->
+ 1. 未設定の各セルに対しpossibleを呼ぶ(イテレータ:each_unknown利用)
+ 1. possibleの結果(配置可能な数字)が一つであれば、その値をセルに設定する。
+ 1. セルの設定ができなくなったら終了する。終了時には、possibleの結果が最も少ないセルのrow、col、配置可能な数字のリストを返す。
 
-* resolve: <!-- .element: style="font-size:xx-large;" -->
- 1. scanを呼び出す。<!-- .element: style="font-size:xx-large;" -->
- 1. 数独が解けていなければ、配置可能な数字を順番に試す(再帰的にresolveを呼ぶ) <!-- .element: style="font-size:xx-large;" -->
+* resolve:
+ 1. scanを呼び出す。
+ 1. 数独が解けていなければ、配置可能な数字を順番に試す(再帰的にresolveを呼ぶ)
 
 
 ---
