@@ -115,6 +115,19 @@ lispはマイナーです。
 
 ## 実行例(ruby:easy)
 ``` 
+$ tail -5 sudoku.rb
+    raise Impossible
+  end
+end
+
+puts Sudoku.solve(Sudoku::Puzzle.new(ARGF.readlines))  # 一行追加
+ sed '/^ *$/d' sudoku.rb |sed '/^ *#/d' |wc
+     127     653    4977
+```
+
+ー行追加して127行？
+
+```
 $cat easy.txt 
 .5...4..7
 8..72...1
@@ -175,6 +188,8 @@ $ ruby sudoku.rb < normal.txt
  * (row-major-aref *配列* *i*) <br>
   *i* は row-major order
 
+プログラムは https://github.com/nz-tcoder/kansai-lisp-2/tree/gh-pages/lisp
+
 
 --
 
@@ -190,6 +205,9 @@ $ ruby sudoku.rb < normal.txt
 
 ## 実行例(lisp: easy)
 ```
+$ sed '/^ *$/d' sudoku.lisp  | sed '/^ *;/d' |wc
+      87     395    3660
+
 CL-USER> easy
 ((0 5 0 0 0 4 0 0 7) (8 0 0 7 2 0 0 0 1) (0 0 6 0 8 0 0 3 0)
  (9 0 8 0 0 2 4 0 6) (1 0 0 0 4 7 3 0 0) (4 2 3 6 5 9 0 0 0)
@@ -239,12 +257,12 @@ BoxOfIndex = [
 ].freeze
 
 def each_unknown
-  0.upto 8 do |row|             # For each row
-    0.upto 8 do |col|           # For each column
-      index = row*9+col         # Cell index for (row,col)
-      next if @grid[index] != 0 # Move on if we know the cell's value 
-      box = BoxOfIndex[index]   # Figure out the box for this cell
-      yield row, col, box       # Invoke the associated block
+  0.upto 8 do |row|
+    0.upto 8 do |col|
+      index = row*9+col
+      next if @grid[index] != 0
+      box = BoxOfIndex[index]
+      yield row, col, box
      end
   end
 end
@@ -314,23 +332,22 @@ end
 (defun possible (pz row column box)
   (set-difference +all-digits+
                   (remove-duplicates (append (row-digits pz row)
-                                             (column-digits pz column)
-                                             (box-digits pz box)))))
+                                                  (column-digits pz column)
+                                                  (box-digits pz box)))))
 
 (defun row-digits (pz row)
-  (remove-zero (mapcar #'(lambda (x) (aref pz row x))
-                       '(0 1 2 3 4 5 6 7 8))))
+  (remove-zero (mapcar #'(lambda (x) (aref pz row x)) '(0 1 2 3 4 5 6 7 8))))
+                       
 
 (defun column-digits (pz column)
-  (remove-zero (mapcar #'(lambda (x) (aref pz x column))
-                       '(0 1 2 3 4 5 6 7 8))))
+  (remove-zero (mapcar #'(lambda (x) (aref pz x column)) '(0 1 2 3 4 5 6 7 8))))
 
 (defconstant +box-index-list+
   (loop for n in '(0 3 6)
      append (loop repeat 3
-               append (loop repeat 3 
-                         for i from n
-                         append (loop repeat 3 collect i)))))
+                    append (loop repeat 3 
+                              for i from n
+                              append (loop repeat 3 collect i)))))
 
 (defun box-digits (pz box)
   (remove-zero (mapcar #'(lambda (x) (row-major-aref pz x))
@@ -385,7 +402,7 @@ end
      do
        (loop for (r c b) in cells
           for digit-list = (possible pz r c b)
-          if (null digit-list) do               ;NG case
+          if (null digit-list) do
             (signal 'impossible)
           else if (= (length digit-list) 1) do
             (setf (aref pz r c) (car digit-list))
@@ -396,8 +413,8 @@ end
             (if (zerop update)
                 (return-from outer
                   (values (find min not-determined
-                                :key #'(lambda (x) (length (third x))))
-                          (= min 0)))))))
+                                    :key #'(lambda (x) (length (third x))))
+                             (= min 0)))))))
 ```
 
 ---
@@ -479,8 +496,8 @@ common lisp <!-- .element: style="text-align: left; font-size:xx-large;" -->
    (if (zerop update)
        (return-from outer
          (values (find min not-determined
-                       :key #'(lambda (x) (length (third x))))
-                 (= min 0)))))))
+                            :key #'(lambda (x) (length (third x))))
+                    (= min 0)))))))
 ```
 
 
