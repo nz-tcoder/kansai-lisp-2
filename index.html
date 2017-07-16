@@ -121,7 +121,7 @@ $ tail -5 sudoku.rb
 end
 
 puts Sudoku.solve(Sudoku::Puzzle.new(ARGF.readlines))  # 一行追加
- sed '/^ *$/d' sudoku.rb |sed '/^ *#/d' |wc
+$ sed '/^ *$/d' sudoku.rb |sed '/^ *#/d' |wc
      127     653    4977
 ```
 
@@ -332,22 +332,24 @@ end
 (defun possible (pz row column box)
   (set-difference +all-digits+
                   (remove-duplicates (append (row-digits pz row)
-                                                  (column-digits pz column)
-                                                  (box-digits pz box)))))
+                                                       (column-digits pz column)
+                                                       (box-digits pz box)))))
 
 (defun row-digits (pz row)
-  (remove-zero (mapcar #'(lambda (x) (aref pz row x)) '(0 1 2 3 4 5 6 7 8))))
+  (remove-zero (mapcar #'(lambda (x) (aref pz row x)) 
+                               '(0 1 2 3 4 5 6 7 8))))
                        
 
 (defun column-digits (pz column)
-  (remove-zero (mapcar #'(lambda (x) (aref pz x column)) '(0 1 2 3 4 5 6 7 8))))
+  (remove-zero (mapcar #'(lambda (x) (aref pz x column)) 
+                               '(0 1 2 3 4 5 6 7 8))))
 
 (defconstant +box-index-list+
   (loop for n in '(0 3 6)
      append (loop repeat 3
-                    append (loop repeat 3 
-                              for i from n
-                              append (loop repeat 3 collect i)))))
+                     append (loop repeat 3 
+                                 for i from n
+                                 append (loop repeat 3 collect i)))))
 
 (defun box-digits (pz box)
   (remove-zero (mapcar #'(lambda (x) (row-major-aref pz x))
@@ -413,8 +415,8 @@ end
             (if (zerop update)
                 (return-from outer
                   (values (find min not-determined
-                                    :key #'(lambda (x) (length (third x))))
-                             (= min 0)))))))
+                                       :key #'(lambda (x) (length (third x))))
+                               (= min 0)))))))
 ```
 
 ---
@@ -496,8 +498,8 @@ common lisp <!-- .element: style="text-align: left; font-size:xx-large;" -->
    (if (zerop update)
        (return-from outer
          (values (find min not-determined
-                            :key #'(lambda (x) (length (third x))))
-                    (= min 0)))))))
+                              :key #'(lambda (x) (length (third x))))
+                      (= min 0)))))))
 ```
 
 
